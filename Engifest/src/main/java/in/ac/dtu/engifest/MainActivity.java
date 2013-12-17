@@ -1,7 +1,6 @@
 package in.ac.dtu.engifest;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -56,30 +55,7 @@ public class MainActivity extends ActionBarActivity
 
                 int mShortAnimationDuration = getResources().getInteger(android.R.integer.config_longAnimTime);
 
-                // Set the content view to 0% opacity but visible, so that it is visible
-                // (but fully transparent) during the animation.
-                mTextView.setAlpha(0f);
                 mTextView.setVisibility(View.VISIBLE);
-
-                // Animate the content view to 100% opacity, and clear any animation
-                // listener set on the view.
-                mTextView.animate()
-                        .alpha(1f)
-                        .setDuration(mShortAnimationDuration)
-                        .setListener(null);
-
-                // Animate the loading view to 0% opacity. After the animation ends,
-                // set its visibility to GONE as an optimization step (it won't
-                // participate in layout passes, etc.)
-                mImageView.animate()
-                        .alpha(0f)
-                        .setDuration(mShortAnimationDuration)
-                        .setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                mImageView.setVisibility(View.GONE);
-                            }
-                        });
 
             }
         }, 3000);
