@@ -1,11 +1,14 @@
 package in.ac.dtu.engifest.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import in.ac.dtu.engifest.MainActivity;
@@ -41,9 +44,9 @@ public class NewsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-        textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+        View rootView = inflater.inflate(R.layout.fragment_news, container, false);
+        ListView newsList = (ListView) rootView.findViewById(R.id.list_news);
+        newsList.setAdapter(new NewsViewAdapter());
         return rootView;
     }
 
@@ -52,5 +55,42 @@ public class NewsFragment extends Fragment {
         super.onAttach(activity);
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
+    }
+
+    private class NewsViewAdapter extends BaseAdapter {
+
+        public NewsViewAdapter(){
+
+        }
+
+        @Override
+        public Object getItem(int arg0) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position){
+            return position;
+        }
+
+        @Override
+        public int getCount(){
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent){
+
+            if(convertView == null){
+                LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.row_news_list, null);
+            }
+
+            TextView tv = (TextView) convertView.findViewById(R.id.title_news);
+            tv.setText("Fuck Yeah!"); // ofc it will be changed later
+
+            return convertView;
+
+        }
     }
 }
