@@ -49,20 +49,6 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-
-        new Handler().postDelayed(new Runnable(){
-            @Override
-            public void run() {
-
-                TextView mTextView = (TextView) findViewById(R.id.section_label);
-                final ImageView mImageView = (ImageView) findViewById(R.id.splash_screen);
-
-                int mShortAnimationDuration = getResources().getInteger(android.R.integer.config_longAnimTime);
-
-                mTextView.setVisibility(View.VISIBLE);
-
-            }
-        }, 3000);
     }
 
     @Override
