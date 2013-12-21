@@ -74,6 +74,8 @@ public class MainActivity extends ActionBarActivity
             case 2:
                 mTitle = "Events";
                 break;
+            case 3:
+                mTitle = "Contacts";
         }
     }
 

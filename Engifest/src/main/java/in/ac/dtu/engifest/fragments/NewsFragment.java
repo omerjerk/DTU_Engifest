@@ -75,7 +75,7 @@ public class NewsFragment extends Fragment {
 
         @Override
         public int getCount(){
-            return 0;
+            return 5;
         }
 
         @Override
