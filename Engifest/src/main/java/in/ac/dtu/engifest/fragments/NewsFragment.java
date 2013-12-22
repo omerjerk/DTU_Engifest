@@ -10,6 +10,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.afollestad.cardsui.Card;
+import com.afollestad.cardsui.CardAdapter;
+import com.afollestad.cardsui.CardHeader;
+import com.afollestad.cardsui.CardListView;
 
 import in.ac.dtu.engifest.MainActivity;
 import in.ac.dtu.engifest.R;
@@ -45,8 +51,27 @@ public class NewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_news, container, false);
-        ListView newsList = (ListView) rootView.findViewById(R.id.list_news);
-        newsList.setAdapter(new NewsViewAdapter());
+        CardListView newsList = (CardListView)rootView.findViewById(android.R.id.list);
+        CardAdapter adapter = new CardAdapter(getActivity())
+                // This sets the color displayed for card titles and header actions by default
+                .setAccentColorRes(android.R.color.holo_blue_dark);
+
+        adapter.add(new CardHeader("Header 1"));
+        adapter.add(new Card("One", "Example 1"));
+        adapter.add(new Card("Two", "Example 2"));
+        adapter.add(new Card("Three", "Example 3"));
+        // Add a header with a subtitle and action, along with 3 more cards below it
+        adapter.add(new CardHeader("Header 2", "Subtitle 2").setAction("Hello", new CardHeader.ActionListener() {
+            @Override
+            public void onClick(CardHeader header) {
+                Toast.makeText(getActivity(), header.getActionTitle(), Toast.LENGTH_SHORT).show();
+            }
+        }));
+        adapter.add(new Card("Four", "Example 4"));
+        adapter.add(new Card("Five", "Example 5"));
+        adapter.add(new Card("Six", "Example 6"));
+
+        newsList.setAdapter(adapter);
         return rootView;
     }
 
