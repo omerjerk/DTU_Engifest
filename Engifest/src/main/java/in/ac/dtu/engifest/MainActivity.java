@@ -18,7 +18,18 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import in.ac.dtu.engifest.fragments.EventsFragment;
@@ -236,15 +247,30 @@ public class MainActivity extends ActionBarActivity
                     regid = gcm.register(SENDER_ID);
                     msg = "Device registered, registration ID=" + regid;
 
-                    //TODO: Need to make an HTTP request to server
+                    // Create a new HttpClient and Post Header
+                    HttpClient httpclient = new DefaultHttpClient();
+                    HttpPost httppost = new HttpPost("http://engifest-1.appspot.com/engifest");
+
+
+                        // Add your data
+                        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+                        nameValuePairs.add(new BasicNameValuePair("regid", regid));
+                        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                        // Execute HTTP Post Request
+                        httpclient.execute(httppost);
+
 
                     // Persist the regID - no need to register again.
                     storeRegistrationId(context, regid);
-                } catch (IOException ex) {
+                } catch (Exception ex) {
                     msg = "Error :" + ex.getMessage();
+                    ex.printStackTrace();
                     // If there is an error, don't just keep trying to register.
                     // Require the user to click a button again, or perform
                     // exponential back-off.
+                } finally {
+                    Log.d(TAG, msg);
                 }
                 return null;
             }
