@@ -79,7 +79,7 @@ public class MainActivity extends ActionBarActivity
             regid = getRegistrationId(context);
 
             if (regid.isEmpty()) {
-                registerInBackground();
+                new RegisterInBackground().execute();
             }
         } else {
             Log.i(TAG, "No valid Google Play Services APK found.");
