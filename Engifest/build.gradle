@@ -38,5 +38,5 @@ dependencies {
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.android.support:appcompat-v7:19.0.0'
     compile 'com.afollestad.cardsui:library:1.0-SNAPSHOT'
-    compile "com.google.android.gms:play-services:4.0.30"
+    compile 'com.google.android.gms:play-services:3.2.+'
 }
