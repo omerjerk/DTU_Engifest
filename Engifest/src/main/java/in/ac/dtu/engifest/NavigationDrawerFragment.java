@@ -1,5 +1,6 @@
 package in.ac.dtu.engifest;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -19,8 +20,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.lang.reflect.Array;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -278,5 +284,51 @@ public class NavigationDrawerFragment extends Fragment {
          * Called when an item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(int position);
+    }
+
+    private class NavigationDrawerAdapter extends BaseAdapter {
+
+        String[] mCategoryMap;
+
+        public NavigationDrawerAdapter(String[] mCategoryMap) {
+
+            this.mCategoryMap = mCategoryMap;
+        }
+
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return Array.getLength(mCategoryMap);
+        }
+
+        @Override
+        public String getItem(int pos) {
+            // TODO Auto-generated method stub
+            return mCategoryMap[pos];
+        }
+
+        @Override
+        public long getItemId(int pos) {
+            // TODO Auto-generated method stub
+            return pos;
+        }
+
+        @Override
+        public View getView(int pos, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.row_navigation_drawer, null);
+            }
+
+            TextView navigationTitle = (TextView) convertView.findViewById(R.id.title_item_navigation);
+            switch(pos){
+                case 0 : navigationTitle.setText("News"); break;
+                case 1 : navigationTitle.setText("Events"); break;
+                case 2 : navigationTitle.setText("Contact Us"); break;
+            }
+
+            return convertView;
+        }
     }
 }
