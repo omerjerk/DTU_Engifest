@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,42 +79,5 @@ public class NewsFragment extends Fragment {
         super.onAttach(activity);
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
-    }
-
-    private class NewsViewAdapter extends BaseAdapter {
-
-        public NewsViewAdapter(){
-
-        }
-
-        @Override
-        public Object getItem(int arg0) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position){
-            return position;
-        }
-
-        @Override
-        public int getCount(){
-            return 5;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent){
-
-            if(convertView == null){
-                LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(R.layout.row_news_list, null);
-            }
-
-            TextView tv = (TextView) convertView.findViewById(R.id.title_news);
-            tv.setText("Fuck Yeah!"); // ofc it will be changed later
-
-            return convertView;
-
-        }
     }
 }
