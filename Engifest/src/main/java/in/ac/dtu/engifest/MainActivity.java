@@ -25,6 +25,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -241,7 +242,14 @@ public class MainActivity extends ActionBarActivity
                     if (gcm == null) {
                         gcm = GoogleCloudMessaging.getInstance(context);
                     }
-                    regid = gcm.register(SENDER_ID);
+
+                    try {
+                        regid = gcm.register(SENDER_ID);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        regid = gcm.register(SENDER_ID);
+                    }
+
                     msg = "Device registered, registration ID=" + regid;
 
                     // Create a new HttpClient and Post Header
