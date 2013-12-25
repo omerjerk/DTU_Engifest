@@ -50,6 +50,7 @@ public class NewsFragment extends Fragment {
 
 
     private static final String TAG = "NewsFragment";
+    View rootView;
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -74,28 +75,8 @@ public class NewsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_news, container, false);
-        CardListView newsList = (CardListView)rootView.findViewById(android.R.id.list);
-        CardAdapter adapter = new CardAdapter(getActivity())
-                // This sets the color displayed for card titles and header actions by default
-                .setAccentColorRes(android.R.color.holo_blue_dark);
-
-        adapter.add(new CardHeader("Header 1"));
-        adapter.add(new Card("One", "Example 1"));
-        adapter.add(new Card("Two", "Example 2"));
-        adapter.add(new Card("Three", "Example 3"));
-        // Add a header with a subtitle and action, along with 3 more cards below it
-        adapter.add(new CardHeader("Header 2", "Subtitle 2").setAction("Hello", new CardHeader.ActionListener() {
-            @Override
-            public void onClick(CardHeader header) {
-                Toast.makeText(getActivity(), header.getActionTitle(), Toast.LENGTH_SHORT).show();
-            }
-        }));
-        adapter.add(new Card("Four", "Example 4"));
-        adapter.add(new Card("Five", "Example 5"));
-        adapter.add(new Card("Six", "Example 6"));
-
-        newsList.setAdapter(adapter);
+        rootView = inflater.inflate(R.layout.fragment_news, container, false);
+        updateView();
         return rootView;
     }
 
@@ -122,6 +103,10 @@ public class NewsFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    public void updateView() {
+        new ReadFromJSON().execute();
+    }
+
     private class ReadFromJSON extends AsyncTask<Void, Void, ArrayList<String>> {
 
         @Override
@@ -146,10 +131,11 @@ public class NewsFragment extends Fragment {
             ArrayList<String> newsList = new ArrayList<String>();
 
             //Log.d(TAG, "jsonString" + jsonString);
+
             try {
                 JSONArray jsonArray = new JSONArray(jsonString);
 
-                for (int i = 1; i < jsonArray.length(); ++i) {
+                for (int i = 0; i < jsonArray.length(); ++i) {
                     String newsItem = jsonArray.getString(i);
                     newsList.add(newsItem);
                     Log.d(TAG, "News = " + newsItem);
@@ -168,6 +154,17 @@ public class NewsFragment extends Fragment {
          */
 
         protected void onPostExecute(ArrayList<String> newsList) {
+
+            CardListView newsListView = (CardListView)rootView.findViewById(android.R.id.list);
+
+            CardAdapter adapter = new CardAdapter(getActivity())
+                    // This sets the color displayed for card titles and header actions by default
+                    .setAccentColorRes(android.R.color.holo_blue_dark);
+            adapter.add(new CardHeader("News"));
+            for(String news : newsList) {
+                adapter.add(new Card(news, ""));
+            }
+            newsListView.setAdapter(adapter);
 
         }
     }

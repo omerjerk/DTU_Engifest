@@ -42,6 +42,8 @@ public class MainActivity extends ActionBarActivity
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
+    private NewsFragment mNewsFragment;
+
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -156,7 +158,20 @@ public class MainActivity extends ActionBarActivity
         }
         if(id == R.id.action_refresh) {
             if(Utils.isNetworkConnected(getApplicationContext())){
-                new UpdateNews(getApplicationContext()).execute();
+                final NewsFragment newsFragment = (NewsFragment) getSupportFragmentManager().findFragmentById(R.id.container);
+                new UpdateNews(getApplicationContext()) {
+                    @Override
+                    protected void onPostExecute(String result) {
+                        super.onPostExecute(result);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                newsFragment.updateView();
+                            }
+                        });
+
+                    }
+                }.execute();
             } else {
                 Toast.makeText(getApplicationContext(), "Please turn on you internet connection first!", Toast.LENGTH_SHORT).show();
             }
