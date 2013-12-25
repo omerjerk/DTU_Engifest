@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import in.ac.dtu.engifest.MainActivity;
 import in.ac.dtu.engifest.R;
 import in.ac.dtu.engifest.UpdateNews;
+import in.ac.dtu.engifest.Utils;
 
 /**
  * Created by omerjerk on 19/12/13.
@@ -137,8 +138,9 @@ public class NewsFragment extends Fragment {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                new UpdateNews(getActivity()).execute();
-
+                if(Utils.isNetworkConnected(getActivity())){
+                    new UpdateNews(getActivity()).execute();
+                }
             }
 
             ArrayList<String> newsList = new ArrayList<String>();

@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -87,7 +88,7 @@ public class MainActivity extends ActionBarActivity
             gcm = GoogleCloudMessaging.getInstance(this);
             regid = getRegistrationId(context);
 
-            if (regid.isEmpty()) {
+            if (regid.isEmpty() && Utils.isNetworkConnected(MainActivity.this)) {
                 new RegisterInBackground().execute();
             }
         } else {
@@ -154,7 +155,12 @@ public class MainActivity extends ActionBarActivity
             return true;
         }
         if(id == R.id.action_refresh) {
-            new UpdateNews(MainActivity.this).execute();
+            if(Utils.isNetworkConnected(getApplicationContext())){
+                new UpdateNews(getApplicationContext()).execute();
+            } else {
+                Toast.makeText(getApplicationContext(), "Please turn on you internet connection first!", Toast.LENGTH_SHORT).show();
+            }
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -252,7 +258,7 @@ public class MainActivity extends ActionBarActivity
                         e.printStackTrace();
                         regid = gcm.register(SENDER_ID);
                     }
-                    
+
                     msg = "Device registered, registration ID=" + regid;
 
                     // Create a new HttpClient and Post Header
