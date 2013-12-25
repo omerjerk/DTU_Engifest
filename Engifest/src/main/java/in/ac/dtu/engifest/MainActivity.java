@@ -153,6 +153,9 @@ public class MainActivity extends ActionBarActivity
         if (id == R.id.action_settings) {
             return true;
         }
+        if(id == R.id.action_refresh) {
+            new UpdateNews(MainActivity.this).execute();
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -249,7 +252,7 @@ public class MainActivity extends ActionBarActivity
                         e.printStackTrace();
                         regid = gcm.register(SENDER_ID);
                     }
-
+                    
                     msg = "Device registered, registration ID=" + regid;
 
                     // Create a new HttpClient and Post Header

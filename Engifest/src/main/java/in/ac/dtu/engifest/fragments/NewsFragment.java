@@ -1,15 +1,26 @@
 package in.ac.dtu.engifest.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +29,18 @@ import com.afollestad.cardsui.CardAdapter;
 import com.afollestad.cardsui.CardHeader;
 import com.afollestad.cardsui.CardListView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+
 import in.ac.dtu.engifest.MainActivity;
 import in.ac.dtu.engifest.R;
+import in.ac.dtu.engifest.UpdateNews;
 
 /**
  * Created by omerjerk on 19/12/13.
@@ -27,6 +48,7 @@ import in.ac.dtu.engifest.R;
 public class NewsFragment extends Fragment {
 
 
+    private static final String TAG = "NewsFragment";
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -97,5 +119,54 @@ public class NewsFragment extends Fragment {
             inflater.inflate(R.menu.news, menu);
 
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    private class ReadFromJSON extends AsyncTask<Void, Void, ArrayList<String>> {
+
+        @Override
+        protected ArrayList<String> doInBackground(Void... v) {
+
+            String jsonString = "";
+
+            try {
+                //Log.d(TAG, getActivity().getFilesDir() + "data.json");
+                File cacheFile = new File(getActivity().getFilesDir(), "data.json");
+
+                BufferedReader br = new BufferedReader(new FileReader(cacheFile));
+                jsonString = br.readLine();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                new UpdateNews(getActivity()).execute();
+
+            }
+
+            ArrayList<String> newsList = new ArrayList<String>();
+
+            //Log.d(TAG, "jsonString" + jsonString);
+            try {
+                JSONArray jsonArray = new JSONArray(jsonString);
+
+                for (int i = 1; i < jsonArray.length(); ++i) {
+                    String newsItem = jsonArray.getString(i);
+                    newsList.add(newsItem);
+                    Log.d(TAG, "News = " + newsItem);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return newsList;
+        }
+
+        /* TODO:
+
+            Show the news inside card-ui
+         */
+
+        protected void onPostExecute(ArrayList<String> newsList) {
+
+        }
     }
 }
