@@ -1,37 +1,21 @@
 package in.ac.dtu.engifest.fragments;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.afollestad.cardsui.Card;
 import com.afollestad.cardsui.CardAdapter;
 import com.afollestad.cardsui.CardHeader;
 import com.afollestad.cardsui.CardListView;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -157,12 +141,12 @@ public class NewsFragment extends Fragment {
 
             CardListView newsListView = (CardListView)rootView.findViewById(android.R.id.list);
 
-            CardAdapter adapter = new CardAdapter(getActivity())
+            CardAdapter adapter = new CardAdapter(getActivity(), R.layout.custom_card_news)
                     // This sets the color displayed for card titles and header actions by default
                     .setAccentColorRes(android.R.color.holo_blue_dark);
             adapter.add(new CardHeader("News"));
             for(String news : newsList) {
-                adapter.add(new Card(news, ""));
+                adapter.add(new Card(news).setLayout(R.layout.custom_card_news));
             }
             newsListView.setAdapter(adapter);
 
