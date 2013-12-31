@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import in.ac.dtu.engifest.MainActivity;
@@ -108,7 +109,13 @@ public class NewsFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
                 if(Utils.isNetworkConnected(getActivity())){
-                    new UpdateNews(getActivity()).execute();
+                    new UpdateNews(getActivity()){
+                        @Override
+                        protected void onPostExecute(String result) {
+                            super.onPostExecute(result);
+                            new ReadFromJSON().execute();
+                        }
+                    }.execute();
                 }
             }
 
