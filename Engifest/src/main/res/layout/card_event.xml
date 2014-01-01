@@ -3,9 +3,14 @@
 
     <RelativeLayout android:id="@+id/inner_frame" style="@style/card_inner">
 
-        <ImageView android:id="@android:id/icon" style="@style/card_thumbnail"/>
+        <ImageView android:id="@+id/image_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_launcher"/>
 
-        <RelativeLayout android:id="@+id/titleFrame" style="@style/card_title_frame">
+        <RelativeLayout android:id="@+id/titleFrame" style="@style/card_title_frame"
+            android:layout_below="@id/image_event">
 
             <TextView android:id="@android:id/title" style="@style/card_title"/>
 

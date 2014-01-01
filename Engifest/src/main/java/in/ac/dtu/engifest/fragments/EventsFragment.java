@@ -8,6 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.afollestad.cardsui.Card;
+import com.afollestad.cardsui.CardAdapter;
+import com.afollestad.cardsui.CardHeader;
+import com.afollestad.cardsui.CardListView;
+
+import in.ac.dtu.engifest.EventsCardAdapter;
 import in.ac.dtu.engifest.MainActivity;
 import in.ac.dtu.engifest.R;
 
@@ -40,9 +46,15 @@ public class EventsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-        textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+        View rootView = inflater.inflate(R.layout.fragment_event, container, false);
+        CardListView eventList = (CardListView) rootView.findViewById(android.R.id.list);
+
+        EventsCardAdapter adapter = new EventsCardAdapter(getActivity());
+        adapter.add(new CardHeader("Events"));
+        adapter.add(new Card("One", "Example 1"));
+        adapter.add(new Card("Two", "Example 2"));
+        adapter.add(new Card("Three", "Example 3"));
+        eventList.setAdapter(adapter);
         return rootView;
     }
 
