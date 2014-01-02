@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+
 import com.afollestad.cardsui.Card;
 import com.afollestad.cardsui.CardAdapter;
 import com.afollestad.cardsui.CardHeader;
@@ -156,6 +158,12 @@ public class NewsFragment extends Fragment {
                 adapter.add(new Card(news).setLayout(R.layout.custom_card_news));
             }
             newsListView.setAdapter(adapter);
+
+            if(newsList.size() != 0) {
+                RelativeLayout loadingLayout = (RelativeLayout) rootView.findViewById(R.id.loading_layout);
+                loadingLayout.setVisibility(View.GONE);
+                newsListView.setVisibility(View.VISIBLE);
+            }
 
         }
     }
