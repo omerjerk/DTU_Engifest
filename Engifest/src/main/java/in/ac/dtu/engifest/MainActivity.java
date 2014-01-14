@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import in.ac.dtu.engifest.fragments.ContactsFragment;
 import in.ac.dtu.engifest.fragments.EventsFragment;
 import in.ac.dtu.engifest.fragments.NewsFragment;
 
@@ -71,7 +72,7 @@ public class MainActivity extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        overridePendingTransition(R.anim.animation_enter, R.anim.animation_leave);
         setContentView(R.layout.activity_main);
 
         context = getApplicationContext();
@@ -105,12 +106,24 @@ public class MainActivity extends ActionBarActivity
         // update the main content by replacing fragments
         switch(position) {
             case 0 :
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, NewsFragment.newInstance(position + 1)).commit();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container, NewsFragment.newInstance(position + 1))
+                        .commit();
                 break;
 
             case 1 :
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, EventsFragment.newInstance(position + 1)).commit();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container, EventsFragment.newInstance(position + 1))
+                        .commit();
                 break;
+
+            case 2 :
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container, ContactsFragment.newInstance(position + 1))
+                        .commit();
         }
     }
 
@@ -282,14 +295,14 @@ public class MainActivity extends ActionBarActivity
                     HttpPost httppost = new HttpPost("http://springboard.championswimmer.in/omerjerk/engifest/register.php");
 
 
-                        // Add your data
-                        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-                        nameValuePairs.add(new BasicNameValuePair("regid", regid));
-                        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                    // Add your data
+                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                    nameValuePairs.add(new BasicNameValuePair("regid", regid));
+                    nameValuePairs.add(new BasicNameValuePair("email_id", Utils.getEmail(getApplicationContext())));
+                    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-                        // Execute HTTP Post Request
-                        httpclient.execute(httppost);
-
+                    // Execute HTTP Post Request
+                    httpclient.execute(httppost);
 
                     // Persist the regID - no need to register again.
                     storeRegistrationId(context, regid);
@@ -333,6 +346,12 @@ public class MainActivity extends ActionBarActivity
     protected void onResume() {
         super.onResume();
         checkPlayServices();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        this.overridePendingTransition(R.anim.animation_enter, R.anim.animation_leave);
     }
 
 }

@@ -141,11 +141,6 @@ public class NewsFragment extends Fragment {
             return newsList;
         }
 
-        /* TODO:
-
-            Show the news inside card-ui
-         */
-
         protected void onPostExecute(ArrayList<String> newsList) {
 
             CardListView newsListView = (CardListView)rootView.findViewById(android.R.id.list);
