@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.afollestad.cardsui.Card;
+import com.afollestad.cardsui.CardAdapter;
 import com.afollestad.cardsui.CardHeader;
 import com.afollestad.cardsui.CardListView;
 
@@ -44,13 +45,13 @@ public class ContactsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_event, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_contacts, container, false);
         CardListView eventList = (CardListView) rootView.findViewById(android.R.id.list);
 
-        EventsCardAdapter adapter = new EventsCardAdapter(getActivity());
-        adapter.add(new CardHeader("Events"));
-        adapter.add(new Card("One", "Example 1"));
-        adapter.add(new Card("Two", "Example 2"));
+        CardAdapter adapter = new CardAdapter(getActivity());
+        adapter.add(new CardHeader("Contacts"));
+        adapter.add(new Card("Umair Khan", "omerjerk@gmail.com"));
+        adapter.add(new Card("And yes the one is temporary", "bitch please"));
         adapter.add(new Card("Three", "Example 3"));
         eventList.setAdapter(adapter);
         return rootView;
