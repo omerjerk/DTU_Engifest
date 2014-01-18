@@ -43,8 +43,6 @@ public class MainActivity extends ActionBarActivity
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
-    private NewsFragment mNewsFragment;
-
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -67,7 +65,7 @@ public class MainActivity extends ActionBarActivity
      * Substitute you own sender ID here. This is the project number you got
      * from the API Console, as described in "Getting Started."
      */
-    String SENDER_ID = "647567414109";
+    String SENDER_ID = "engifest-1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -293,7 +291,6 @@ public class MainActivity extends ActionBarActivity
                     // Create a new HttpClient and Post Header
                     HttpClient httpclient = new DefaultHttpClient();
                     HttpPost httppost = new HttpPost("http://springboard.championswimmer.in/omerjerk/engifest/register.php");
-
 
                     // Add your data
                     List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();

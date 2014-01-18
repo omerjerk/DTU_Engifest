@@ -63,7 +63,7 @@ public class NewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_news, container, false);
-        updateView();
+        //updateView();
         return rootView;
     }
 
@@ -115,7 +115,7 @@ public class NewsFragment extends Fragment {
                         @Override
                         protected void onPostExecute(String result) {
                             super.onPostExecute(result);
-                            new ReadFromJSON().execute();
+                            //new ReadFromJSON().execute();
                         }
                     }.execute();
                 }

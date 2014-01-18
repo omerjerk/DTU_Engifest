@@ -5,7 +5,11 @@ package in.ac.dtu.engifest;
  */
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,8 +22,20 @@ import com.afollestad.cardsui.CardAdapter;
  */
 public class EventsCardAdapter extends CardAdapter<Card> {
 
+    private final static String TAG = "EventsCardAdapter";
+
+    private Activity context;
     public EventsCardAdapter(Activity context) {
         super(context, R.layout.card_event);
+
+        this.context = context;
+    }
+
+    public Drawable getEventDrawable (String eventName) {
+        eventName = eventName.toLowerCase();
+        int eventDrawableId = context.getResources().getIdentifier(eventName, "drawable", context.getPackageName());
+        Drawable eventDrawable = context.getResources().getDrawable(eventDrawableId);
+        return eventDrawable;
     }
 
     @Override
@@ -52,6 +68,19 @@ public class EventsCardAdapter extends CardAdapter<Card> {
     public View onViewCreated(final int index, View recycled, Card item) {
 
         // Optional, you can modify properties of other views that you add to the card layout that aren't the icon, title, content...
+
+        String[] eventNames = {"bob", "dirt", "natya", "nukkad", "paridhan", "soundtrack", "spandan", "stfu"};
+
+        if(recycled == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            recycled = inflater.inflate(R.layout.card_event, null);
+        }
+        ImageView mImageView = (ImageView) recycled.findViewById(R.id.image_event);
+        //getEventDrawable(eventNames[index - 1]);
+        if(mImageView != null) {
+            mImageView.setBackgroundDrawable(getEventDrawable(eventNames[index - 1]));
+        }
+
         return super.onViewCreated(index, recycled, item);
     }
 
