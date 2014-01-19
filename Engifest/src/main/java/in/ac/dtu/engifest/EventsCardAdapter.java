@@ -23,12 +23,14 @@ import com.afollestad.cardsui.CardAdapter;
 public class EventsCardAdapter extends CardAdapter<Card> {
 
     private final static String TAG = "EventsCardAdapter";
+    int position;
 
     private Activity context;
-    public EventsCardAdapter(Activity context) {
+    public EventsCardAdapter(Activity context, int position) {
         super(context, R.layout.card_event);
 
         this.context = context;
+        this.position = position;
     }
 
     public Drawable getEventDrawable (String eventName) {
@@ -69,16 +71,25 @@ public class EventsCardAdapter extends CardAdapter<Card> {
 
         // Optional, you can modify properties of other views that you add to the card layout that aren't the icon, title, content...
 
-        String[] eventNames = {"bob", "dirt", "natya", "nukkad", "paridhan", "soundtrack", "spandan", "stfu"};
+        String[] eventNamesDay1 = {"bob", "dirt"};
+        String[] eventNamesDay2 = { "natya", "nukkad", "paridhan"};
+        String[] eventNamesDay3 = {"soundtrack", "spandan", "stfu"};
 
         if(recycled == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             recycled = inflater.inflate(R.layout.card_event, null);
         }
         ImageView mImageView = (ImageView) recycled.findViewById(R.id.image_event);
-        //getEventDrawable(eventNames[index - 1]);
         if(mImageView != null) {
-            mImageView.setBackgroundDrawable(getEventDrawable(eventNames[index - 1]));
+            switch (position) {
+                case 0: mImageView.setBackgroundDrawable(getEventDrawable(eventNamesDay1[index - 1]));
+                    break;
+                case 1: mImageView.setBackgroundDrawable(getEventDrawable(eventNamesDay2[index - 1]));
+                    break;
+                case 2: mImageView.setBackgroundDrawable(getEventDrawable(eventNamesDay3[index - 1]));
+                    break;
+            }
+
         }
 
         return super.onViewCreated(index, recycled, item);

@@ -99,7 +99,7 @@ public class EventsFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            return new EventsSlidingFragment();
+            return new EventsSlidingFragment(position);
         }
 
         @Override
@@ -117,6 +117,12 @@ public class EventsFragment extends Fragment {
 
     private class EventsSlidingFragment extends Fragment {
 
+        int position;
+
+        public EventsSlidingFragment(int position) {
+            this.position = position;
+        }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -125,11 +131,13 @@ public class EventsFragment extends Fragment {
 
             CardListView eventList = (CardListView) v.findViewById(android.R.id.list);
 
-            EventsCardAdapter adapter = new EventsCardAdapter(getActivity());
+            EventsCardAdapter adapter = new EventsCardAdapter(getActivity(), position);
             adapter.add(new CardHeader("Events"));
             adapter.add(new Card("One", "Example 1"));
             adapter.add(new Card("Two", "Example 2"));
-            adapter.add(new Card("Three", "Example 3"));
+            if(position != 0) {
+                adapter.add(new Card("Three", "Example 3"));
+            }
             eventList.setAdapter(adapter);
             return v;
         }

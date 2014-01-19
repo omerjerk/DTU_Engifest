@@ -5,5 +5,5 @@
     <item android:id="@+id/action_refresh"
         android:title="@string/action_refresh"
         android:icon="@drawable/icon_refresh"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 </menu>
