@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -25,6 +24,8 @@ import in.ac.dtu.engifest.R;
  * Created by omerjerk on 19/12/13.
  */
 public class EventsFragment extends Fragment {
+
+    private static final String TAG = "EventsFragment";
 
     /**
      * The fragment argument representing the section number for this
@@ -70,7 +71,7 @@ public class EventsFragment extends Fragment {
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) rootView.findViewById(R.id.pager);
-        mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
+        mPagerAdapter = new ScreenSlidePagerAdapter(getChildFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
         // Bind the tabs to the ViewPager
@@ -132,5 +133,6 @@ public class EventsFragment extends Fragment {
             eventList.setAdapter(adapter);
             return v;
         }
+
     }
 }
