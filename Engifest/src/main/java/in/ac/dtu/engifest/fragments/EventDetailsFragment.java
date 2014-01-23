@@ -1,6 +1,7 @@
 package in.ac.dtu.engifest.fragments;
 
 import android.graphics.Point;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -61,6 +63,9 @@ public class EventDetailsFragment extends DialogFragment {
 
         tabs.setViewPager(pager);
 
+        ImageView mImageView = (ImageView) root.findViewById(R.id.image);
+        mImageView.setBackgroundDrawable(Utils.getEventDrawable(getActivity(), Utils.eventNamesDay[i][j]));
+
         return root;
     }
 
@@ -72,7 +77,7 @@ public class EventDetailsFragment extends DialogFragment {
         // change dialog width
         if (getDialog() != null) {
 
-            int fullWidth = getDialog().getWindow().getAttributes().width;
+            int fullWidth;
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
                 Display display = getActivity().getWindowManager().getDefaultDisplay();

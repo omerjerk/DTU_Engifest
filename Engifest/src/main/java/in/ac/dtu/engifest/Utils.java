@@ -3,6 +3,7 @@ package in.ac.dtu.engifest;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -62,4 +63,11 @@ public class Utils {
             {"fucking desc3", "fucking desc4", "fucking desc5"},
             {"fucking desc6", "fucking desc7", "fucking desc8"}
     };
+
+    public static Drawable getEventDrawable (Context context, String eventName) {
+        eventName = eventName.toLowerCase();
+        int eventDrawableId = context.getResources().getIdentifier(eventName, "drawable", context.getPackageName());
+        Drawable eventDrawable = context.getResources().getDrawable(eventDrawableId);
+        return eventDrawable;
+    }
 }

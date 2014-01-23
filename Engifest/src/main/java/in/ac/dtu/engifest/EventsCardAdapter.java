@@ -33,13 +33,6 @@ public class EventsCardAdapter extends CardAdapter<Card> {
         this.position = position;
     }
 
-    public Drawable getEventDrawable (String eventName) {
-        eventName = eventName.toLowerCase();
-        int eventDrawableId = context.getResources().getIdentifier(eventName, "drawable", context.getPackageName());
-        Drawable eventDrawable = context.getResources().getDrawable(eventDrawableId);
-        return eventDrawable;
-    }
-
     @Override
     protected boolean onProcessThumbnail(ImageView icon, Card card) {
         // Optional, you can modify properties of the icon ImageView here.
@@ -74,7 +67,7 @@ public class EventsCardAdapter extends CardAdapter<Card> {
         }
         ImageView mImageView = (ImageView) recycled.findViewById(R.id.image_event);
         if(mImageView != null) {
-            mImageView.setBackgroundDrawable(getEventDrawable(Utils.eventNamesDay[position][index - 1]));
+            mImageView.setBackgroundDrawable(Utils.getEventDrawable(context, Utils.eventNamesDay[position][index - 1]));
         }
 
         return super.onViewCreated(index, recycled, item);
