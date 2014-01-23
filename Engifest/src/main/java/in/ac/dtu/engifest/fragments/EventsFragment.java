@@ -12,11 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.afollestad.cardsui.Card;
+import com.afollestad.cardsui.CardBase;
 import com.afollestad.cardsui.CardHeader;
 import com.afollestad.cardsui.CardListView;
 import com.astuetz.PagerSlidingTabStrip;
 
 import in.ac.dtu.engifest.EventsCardAdapter;
+import in.ac.dtu.engifest.fragments.EventDetailsFragment;
 import in.ac.dtu.engifest.MainActivity;
 import in.ac.dtu.engifest.R;
 
@@ -119,6 +121,8 @@ public class EventsFragment extends Fragment {
 
         int position;
 
+        public EventsSlidingFragment() {}
+
         public EventsSlidingFragment(int position) {
             this.position = position;
         }
@@ -139,6 +143,15 @@ public class EventsFragment extends Fragment {
                 adapter.add(new Card("Three", "Example 3"));
             }
             eventList.setAdapter(adapter);
+
+            eventList.setOnCardClickListener(new CardListView.CardClickListener() {
+                @Override
+                public void onCardClick(int index, CardBase card, View view) {
+                    EventDetailsFragment dialog = EventDetailsFragment.newInstance(position, index - 1);
+                    dialog.show(getActivity().getSupportFragmentManager(), "EventsDetailsFragment");
+                }
+            });
+
             return v;
         }
 

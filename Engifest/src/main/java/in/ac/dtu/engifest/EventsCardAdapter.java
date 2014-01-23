@@ -57,7 +57,6 @@ public class EventsCardAdapter extends CardAdapter<Card> {
         // Optional, you can modify properties of the content textview here.
         content.setTextColor(Color.DKGRAY);
         return super.onProcessContent(content, card);
-
     }
 
     @Override
@@ -69,32 +68,16 @@ public class EventsCardAdapter extends CardAdapter<Card> {
     @Override
     public View onViewCreated(final int index, View recycled, Card item) {
 
-        // Optional, you can modify properties of other views that you add to the card layout that aren't the icon, title, content...
-
-        String[] eventNamesDay1 = {"bob", "dirt"};
-        String[] eventNamesDay2 = { "natya", "nukkad", "paridhan"};
-        String[] eventNamesDay3 = {"soundtrack", "spandan", "stfu"};
-
         if(recycled == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             recycled = inflater.inflate(R.layout.card_event, null);
         }
         ImageView mImageView = (ImageView) recycled.findViewById(R.id.image_event);
         if(mImageView != null) {
-            switch (position) {
-                case 0: mImageView.setBackgroundDrawable(getEventDrawable(eventNamesDay1[index - 1]));
-                    break;
-                case 1: mImageView.setBackgroundDrawable(getEventDrawable(eventNamesDay2[index - 1]));
-                    break;
-                case 2: mImageView.setBackgroundDrawable(getEventDrawable(eventNamesDay3[index - 1]));
-                    break;
-            }
-
+            mImageView.setBackgroundDrawable(getEventDrawable(Utils.eventNamesDay[position][index - 1]));
         }
 
         return super.onViewCreated(index, recycled, item);
     }
 
 }
-
-

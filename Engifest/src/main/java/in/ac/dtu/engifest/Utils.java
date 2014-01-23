@@ -50,4 +50,16 @@ public class Utils {
         }
         return account;
     }
+
+    public static String[][] eventNamesDay = {
+            {"bob", "dirt"},
+            { "natya", "nukkad", "paridhan"},
+            {"soundtrack", "spandan", "stfu"}
+    };
+
+    public static String[][] eventDesc = {
+            {"fucking desc1", "fucking desc2"},
+            {"fucking desc3", "fucking desc4", "fucking desc5"},
+            {"fucking desc6", "fucking desc7", "fucking desc8"}
+    };
 }
