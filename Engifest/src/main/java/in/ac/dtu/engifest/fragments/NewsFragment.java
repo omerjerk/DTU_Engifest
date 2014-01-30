@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.afollestad.cardsui.Card;
 import com.afollestad.cardsui.CardAdapter;
@@ -63,7 +64,7 @@ public class NewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_news, container, false);
-        //updateView();
+        updateView();
         return rootView;
     }
 
@@ -115,9 +116,12 @@ public class NewsFragment extends Fragment {
                         @Override
                         protected void onPostExecute(String result) {
                             super.onPostExecute(result);
-                            //new ReadFromJSON().execute();
+                            new ReadFromJSON().execute();
                         }
                     }.execute();
+                } else {
+                    Toast.makeText(getActivity(), "Please turn on your internet connection get the latest news!", Toast.LENGTH_SHORT)
+                            .show();
                 }
             }
 

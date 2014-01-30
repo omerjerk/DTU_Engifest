@@ -53,15 +53,24 @@ public class Utils {
     }
 
     public static String[][] eventNamesDay = {
-            {"bob", "dirt"},
-            { "natya", "nukkad", "paridhan"},
-            {"soundtrack", "spandan", "stfu"}
+            {"anusthaan", "spandan",  "dirt"},
+            {"bob", "natya", "stfu"},
+            {"nukkad", "soundtrack" }
     };
 
     public static String[][] eventDesc = {
-            {"fucking desc1", "fucking desc2"},
-            {"fucking desc3", "fucking desc4", "fucking desc5"},
-            {"fucking desc6", "fucking desc7", "fucking desc8"}
+            {
+                    "Dance in India comprises the varied styles of dances. Classical Indian dance manages to evoke a rasa by invoking a particular bhava (emotion). Classical dancer acts out a story almost exclusively through gestures. Folk dances are numerous in number and style, and vary according to the local tradition of the respective state, ethnic or geographic regions.",
+                    "“Dance is the hidden language of the soul.”\n" +
+                            "Dance is performed in many cultures as a form of emotional expression, social interaction, or exercise, in a spiritual or performance setting, and is sometimes used to express ideas or tell a story. Spandan houses three categories."},
+            {
+                    "B.O.B brings together rock lovers from all over the country for an electrifying experience, courtesy some of the most talented amateur rock bands in the land. It is a live music competition joined by bands from all over the country. It is open to bands of all music genres. With a combination of adrenaline charged performances, the event is a hot favorite amongst youngsters.",
+                    "Natya represents Theatre and Theatricality is a powerful tool. Theatre is a collaborative form of fine art that uses live performers to present the experience of a real or imagined event before a live audience in a specific place. The right combination of “Lights”, “Camera” & most importantly “Action”. Various genres are Comedy, Farce, Satirical, Tragedy & Historical.",
+                    "Street Dance refers to refers to dance styles - regardless of country of origin - that evolved outside of dance studios in any available open space such as streets, dance parties, block parties, parks, school yards etc."},
+            {
+                    "Nukkad represents Street Theatre. It is a form of theatrical performance and presentation in outdoor public spaces without a specific paying audience. Street theatre is arguably the oldest form of theatre in existence: most mainstream entertainment mediums can be traced back to origins in street performing, including religious passion plays and many other forms.",
+                    "“Music is a world within itself, with a language we all understand.” – Stevie Wonder\n" +
+                            "No festival is complete without music. Soundtrack is the vocal music competition & it houses three categories."}
     };
 
     public static Drawable getEventDrawable (Context context, String eventName) {

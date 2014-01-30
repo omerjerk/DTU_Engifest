@@ -18,7 +18,6 @@ import com.afollestad.cardsui.CardListView;
 import com.astuetz.PagerSlidingTabStrip;
 
 import in.ac.dtu.engifest.EventsCardAdapter;
-import in.ac.dtu.engifest.fragments.EventDetailsFragment;
 import in.ac.dtu.engifest.MainActivity;
 import in.ac.dtu.engifest.R;
 
@@ -136,11 +135,22 @@ public class EventsFragment extends Fragment {
             CardListView eventList = (CardListView) v.findViewById(android.R.id.list);
 
             EventsCardAdapter adapter = new EventsCardAdapter(getActivity(), position);
-            adapter.add(new CardHeader("Events"));
-            adapter.add(new Card("One", "Example 1"));
-            adapter.add(new Card("Two", "Example 2"));
-            if(position != 0) {
-                adapter.add(new Card("Three", "Example 3"));
+            switch(position) {
+                case 0:
+                    adapter.add(new CardHeader("14th February"));
+                    adapter.add(new Card("THE CLASSICAL & FOLK DANCE COMPETITION", "Dr. B. R. Ambedkar Auditorium"));
+                    adapter.add(new Card("THE WESTERN DANCE COMPETITION", "Dr. B. R. Ambedkar Auditorium"));
+                    break;
+                case 1:
+                    adapter.add(new CardHeader("15th February"));
+                    adapter.add(new Card("ARPEGGIO", "Sports Complex, DTU"));
+                    adapter.add(new Card("THE STAGE PLAY COMPETITION", "Dr. B. R. Ambedkar Auditorium"));
+                    adapter.add(new Card("THE STREET DANCE COMPETITION", "Open Amphitheatre (OAT)"));
+                    break;
+                case 2:
+                    adapter.add(new CardHeader("16th February"));
+                    adapter.add(new Card("THE STREET PLAY COMPETITION", "Mini OAT, DTU"));
+                    adapter.add(new Card("THE MUSIC COMPETITION", "Dr. B. R. Ambedkar Auditorium"));
             }
             eventList.setAdapter(adapter);
 

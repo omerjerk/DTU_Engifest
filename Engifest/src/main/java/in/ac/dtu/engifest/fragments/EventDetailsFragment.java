@@ -122,10 +122,10 @@ public class EventDetailsFragment extends DialogFragment {
             TextView v = new TextView(getActivity());
             v.setBackgroundResource(R.color.background_window);
             v.setText(Utils.eventDesc[i][j]);
-            final int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, getResources()
+            final int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 11, getResources()
                     .getDisplayMetrics());
             v.setPadding(padding, padding, padding, padding);
-            v.setGravity(Gravity.CENTER);
+            v.setGravity(Gravity.LEFT);
             container.addView(v, 0);
             return v;
         }
