@@ -311,7 +311,7 @@ public class NavigationDrawerFragment extends Fragment {
             switch(pos){
                 case 0 : navigationTitle.setText("News"); break;
                 case 1 : navigationTitle.setText("Events"); break;
-                case 2 : navigationTitle.setText("Contact Us"); break;
+                case 2 : navigationTitle.setText("Reach Us"); break;
             }
 
             return convertView;

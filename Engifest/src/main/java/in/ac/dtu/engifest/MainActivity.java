@@ -31,9 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import in.ac.dtu.engifest.fragments.ContactsFragment;
 import in.ac.dtu.engifest.fragments.EventsFragment;
 import in.ac.dtu.engifest.fragments.NewsFragment;
+import in.ac.dtu.engifest.fragments.ReachUSFragment;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -120,7 +120,7 @@ public class MainActivity extends ActionBarActivity
             case 2 :
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.container, ContactsFragment.newInstance(position + 1))
+                        .replace(R.id.container, ReachUSFragment.newInstance(position + 1))
                         .commit();
         }
     }
