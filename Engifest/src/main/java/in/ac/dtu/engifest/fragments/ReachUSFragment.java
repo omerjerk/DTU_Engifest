@@ -3,14 +3,17 @@ package in.ac.dtu.engifest.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -56,17 +59,15 @@ public class ReachUSFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        if (rootView != null) {
-            ViewGroup parent = (ViewGroup) rootView.getParent();
-            if (parent != null)
-                parent.removeView(rootView);
-        }
         try {
             rootView = inflater.inflate(R.layout.fragment_reach_us, container, false);
-            mMap = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
         } catch (InflateException e) {
         /* map is already there, just return view as it is */
+            Log.d(TAG, "Map is already there");
+            Toast.makeText(getActivity(), "Please restart the app to see the map.", Toast.LENGTH_SHORT).show();
         }
+        mMap = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+
         /*
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -95,5 +96,14 @@ public class ReachUSFragment extends Fragment {
         super.onAttach(activity);
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Fragment f = getFragmentManager()
+                .findFragmentById(R.id.map);
+        if (f != null)
+            getFragmentManager().beginTransaction().remove(f).commit();
     }
 }
