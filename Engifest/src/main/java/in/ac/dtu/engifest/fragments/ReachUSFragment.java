@@ -18,6 +18,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.lang.ref.WeakReference;
+
 import in.ac.dtu.engifest.MainActivity;
 import in.ac.dtu.engifest.R;
 
@@ -25,6 +27,8 @@ import in.ac.dtu.engifest.R;
  * Created by omerjerk on 30/1/14.
  */
 public class ReachUSFragment extends Fragment {
+
+    private static WeakReference<MainActivity> refMainActivity = null;
 
     private static final String TAG = "ReachUSFragment";
 
@@ -103,7 +107,7 @@ public class ReachUSFragment extends Fragment {
         super.onDestroyView();
         Fragment f = getFragmentManager()
                 .findFragmentById(R.id.map);
-        if (f != null)
+        if (f != null && !getActivity().isFinishing())
             getFragmentManager().beginTransaction().remove(f).commit();
     }
 }
