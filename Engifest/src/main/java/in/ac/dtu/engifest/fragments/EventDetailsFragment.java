@@ -1,5 +1,6 @@
 package in.ac.dtu.engifest.fragments;
 
+import android.app.ActionBar;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
@@ -100,7 +101,7 @@ public class EventDetailsFragment extends DialogFragment {
 
     public class ContactPagerAdapter extends PagerAdapter implements IconTabProvider {
 
-        private final int[] ICONS = { R.drawable.ic_launcher, R.drawable.icon_refresh };
+        private final int[] ICONS = { R.drawable.ic_launcher, R.drawable.contact};
 
         public ContactPagerAdapter() {
             super();
@@ -121,7 +122,16 @@ public class EventDetailsFragment extends DialogFragment {
             // looks a little bit messy here
             TextView v = new TextView(getActivity());
             v.setBackgroundResource(R.color.background_window);
-            v.setText(Utils.eventDesc[i][j]);
+            switch(position) {
+                case 0:
+                    v.setText(Utils.eventDesc[i][j]);
+                    /*
+                    ViewGroup.LayoutParams params = container.getLayoutParams();
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT; */
+                    break;
+                case 1:
+                    v.setText(Utils.contacts[i][j]);
+            }
             final int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 11, getResources()
                     .getDisplayMetrics());
             v.setPadding(padding, padding, padding, padding);
