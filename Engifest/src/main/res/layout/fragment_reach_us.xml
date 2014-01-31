@@ -10,14 +10,4 @@
         android:layout_height="match_parent"
         android:name="com.google.android.gms.maps.SupportMapFragment"/>
 
-    <TextView
-        android:id="@+id/signature"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Made with ♥ by an ME guy."
-        android:textColor="#ff747474"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp" />
-
 </RelativeLayout>
