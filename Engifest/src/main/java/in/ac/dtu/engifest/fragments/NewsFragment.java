@@ -43,6 +43,8 @@ public class NewsFragment extends Fragment {
      * The fragment argument representing the section number for this
      * fragment.
      */
+
+    private ReadFromJSON mReadFromJSON;
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     /**
@@ -92,7 +94,8 @@ public class NewsFragment extends Fragment {
     }
 
     public void updateView() {
-        new ReadFromJSON().execute();
+        mReadFromJSON = new ReadFromJSON();
+        mReadFromJSON.execute();
     }
 
     private class ReadFromJSON extends AsyncTask<Void, Void, ArrayList<String>> {
@@ -120,8 +123,16 @@ public class NewsFragment extends Fragment {
                         }
                     }.execute();
                 } else {
-                    Toast.makeText(getActivity(), "Please turn on your internet connection get the latest news!", Toast.LENGTH_SHORT)
-                            .show();
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(), "Please turn on your internet connection get the latest news!", Toast.LENGTH_SHORT)
+                                    .show();
+                            RelativeLayout loadingLayout = (RelativeLayout) rootView.findViewById(R.id.loading_layout);
+                            loadingLayout.setVisibility(View.GONE);
+                        }
+                    });
+
                 }
             }
 
@@ -165,5 +176,11 @@ public class NewsFragment extends Fragment {
             }
 
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mReadFromJSON.cancel(true);
     }
 }
