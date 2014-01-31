@@ -2,9 +2,11 @@ package in.ac.dtu.engifest;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -65,7 +67,7 @@ public class MainActivity extends ActionBarActivity
      * Substitute you own sender ID here. This is the project number you got
      * from the API Console, as described in "Getting Started."
      */
-    String SENDER_ID = "engifest-1";
+    String SENDER_ID = "246147594212";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +92,7 @@ public class MainActivity extends ActionBarActivity
             gcm = GoogleCloudMessaging.getInstance(this);
             regid = getRegistrationId(context);
 
-            if (regid.isEmpty() && Utils.isNetworkConnected(MainActivity.this)) {
+            if (regid.equals("") && Utils.isNetworkConnected(MainActivity.this)) {
                 new RegisterInBackground().execute();
             }
         } else {
@@ -122,6 +124,10 @@ public class MainActivity extends ActionBarActivity
                         .beginTransaction()
                         .replace(R.id.container, ReachUSFragment.newInstance(position + 1))
                         .commit();
+                break;
+            case 3:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.foreseegame.com/PromotionalActivities.aspx?paramPro=DelhiTechUniversity"));
+                startActivity(browserIntent);
         }
     }
 
@@ -134,7 +140,7 @@ public class MainActivity extends ActionBarActivity
                 mTitle = "Events";
                 break;
             case 3:
-                mTitle = "Contacts";
+                mTitle = "Reach Us";
         }
     }
 
@@ -220,7 +226,7 @@ public class MainActivity extends ActionBarActivity
     private String getRegistrationId(Context context) {
         final SharedPreferences prefs = getGCMPreferences(context);
         String registrationId = prefs.getString(PROPERTY_REG_ID, "");
-        if (registrationId.isEmpty()) {
+        if (registrationId.equals("")) {
             Log.i(TAG, "Registration not found.");
             return "";
         }
@@ -270,6 +276,7 @@ public class MainActivity extends ActionBarActivity
 
             @Override
             protected Void doInBackground(Void... params) {
+                Log.d(TAG, "Registering ...  ###  fuck yeah ###");
                 String msg = "";
                 try {
                     if (gcm == null) {

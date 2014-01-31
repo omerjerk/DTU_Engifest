@@ -102,7 +102,7 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new NavigationDrawerAdapter(new String[] {"News", "Events", "Contacts"}));
+        mDrawerListView.setAdapter(new NavigationDrawerAdapter(new String[] {"News", "Events", "Reach Us", "Register"}));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -312,6 +312,10 @@ public class NavigationDrawerFragment extends Fragment {
                 case 0 : navigationTitle.setText("News"); break;
                 case 1 : navigationTitle.setText("Events"); break;
                 case 2 : navigationTitle.setText("Reach Us"); break;
+                case 3 :
+                    ViewGroup mViewGroup = (ViewGroup) navigationTitle.getParent();
+                    mViewGroup.setBackgroundColor(getResources().getColor(R.color.register_item));
+                    navigationTitle.setText("Register"); break;
             }
 
             return convertView;
