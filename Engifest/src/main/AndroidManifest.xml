@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="in.ac.dtu.engifest"
-    android:versionCode="2"
-    android:versionName="1.0.2" >
+    android:versionCode="5"
+    android:versionName="1.0.5" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -53,7 +53,7 @@
         <service android:name=".GcmIntentService" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyC_hVYbLRkWQTJ47OIS0h11aEftITaxFvk"/>
+            android:value="AIzaSyBnhQMdNvwSj_uht9CBxvd9h2bbD4aCQ2Q"/>
     </application>
 
 </manifest>
